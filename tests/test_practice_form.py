@@ -1,3 +1,5 @@
+import os.path
+
 from selene import browser, command, have, be
 
 
@@ -18,6 +20,7 @@ def test_filling_and_sending_form():
     browser.element('#subjectsInput').type('Computer Science').press_enter()
     browser.element('[for=hobbies-checkbox-1]').click()
     browser.element('[for=hobbies-checkbox-2]').click()
+    browser.element('#uploadPicture').type(os.path.abspath('../imgs/kapibara.png'))
     browser.element('#currentAddress').type("Улица Пушкина, дом Котолушкина").press_enter()
     browser.element('#state').click().element('#react-select-3-option-2').click()
     browser.element('#city').click().element('#react-select-4-option-1').click()
@@ -30,6 +33,7 @@ def test_filling_and_sending_form():
     browser.element('.table').should(have.text('15 September,2002'))
     browser.element('.table').should(have.text('Computer Science'))
     browser.element('.table').should(have.text('Sports, Reading'))
+    browser.element('.table').should(have.text('kapibara.png'))
     browser.element('.table').should(have.text('Улица Пушкина, дом Котолушкина'))
     browser.element('.table').should(have.text('Haryana Panipat'))
     browser.element('#closeLargeModal').should(be.clickable)
